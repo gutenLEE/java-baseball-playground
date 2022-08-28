@@ -34,14 +34,7 @@ public class StringCalculatorTest {
 
         Queue<String> operates = new LinkedList<>();
         Queue<Integer> numbers = new LinkedList<>();
-        for (int i = 0; i < expression.length; i++) {
-            if (i % 2 != 0) {
-                operates.add(expression[i]);
-            } else {
-                int num = Integer.parseInt(expression[i]);
-                numbers.add(num);
-            }
-        }
+        setExpressionToQueues(expression, operates, numbers);
 
         int foreNum = numbers.poll();
         while (!operates.isEmpty()) {
@@ -72,6 +65,29 @@ public class StringCalculatorTest {
 
         return input.split(" ");
     }
+
+
+    private boolean isOperate(String operate) {
+        return (operate.equals("-") || operate.equals("+") || operate.equals("*") || operate.equals("/"));
+    }
+
+
+    private void setExpressionToQueues(String[] expression, Queue<String> operates, Queue<Integer> numbers) {
+        for (int i = 0; i < expression.length; i++) {
+            if (i % 2 != 0) {
+                String operate = expression[i];
+                if (!isOperate(operate)) {
+                    throw new RuntimeException();
+                }
+                operates.add(operate);
+            } else {
+                int num = Integer.parseInt(expression[i]);
+                numbers.add(num);
+            }
+        }
+    }
+
+
 
     private void assertInput(String input) {
         InputStream stdin = System.in;
