@@ -36,27 +36,7 @@ public class StringCalculatorTest {
         Queue<Integer> numbers = new LinkedList<>();
         setExpressionToQueues(expression, operates, numbers);
 
-        int foreNum = numbers.poll();
-        while (!operates.isEmpty()) {
-            String operate = operates.poll();
-            int postNum = numbers.poll();
-            switch (operate) {
-                case "+":
-                    foreNum = foreNum + postNum;
-                    break;
-                case "-":
-                    foreNum = foreNum - postNum;
-                    break;
-                case "*":
-                    foreNum = foreNum * postNum;
-                    break;
-                case "/":
-                    foreNum = foreNum / postNum;
-                    break;
-            }
-        }
-
-        assertThat(foreNum).isEqualTo(Integer.parseInt(expected));
+        assertThat(calculate(operates, numbers)).isEqualTo(Integer.parseInt(expected));
     }
 
     private String[] splitInput(String input) {
@@ -85,6 +65,30 @@ public class StringCalculatorTest {
                 numbers.add(num);
             }
         }
+    }
+
+
+    private int calculate(Queue<String> operates, Queue<Integer> numbers) {
+        int foreNum = numbers.poll();
+        while (!operates.isEmpty()) {
+            String operate = operates.poll();
+            int postNum = numbers.poll();
+            switch (operate) {
+                case "+":
+                    foreNum = foreNum + postNum;
+                    break;
+                case "-":
+                    foreNum = foreNum - postNum;
+                    break;
+                case "*":
+                    foreNum = foreNum * postNum;
+                    break;
+                case "/":
+                    foreNum = foreNum / postNum;
+                    break;
+            }
+        }
+        return foreNum;
     }
 
 
