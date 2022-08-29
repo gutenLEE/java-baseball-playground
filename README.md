@@ -1,4 +1,4 @@
-## [NEXTSTEP 플레이그라운드의 미션 진행 과정](https://github.com/next-step/nextstep-docs/blob/master/playground/README.md)
+
 
 ---
 ## 학습 효과를 높이기 위해 추천하는 미션 진행 방법
