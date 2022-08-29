@@ -125,11 +125,9 @@ public class BaseballTest {
     void game_test() throws Exception {
 
         int strikeCount = 0, ballCount = 0;
-        String answer = createAnswer();
-        while(true) {
-            System.out.println("입력하시오 : ");
-            Scanner scanner = new Scanner(System.in);
-            String userAnswer = scanner.nextLine();
+        String answer = "123";
+        String[] givenInputAnswers = {"156", "345", "567", "123"};
+        for (String userAnswer : givenInputAnswers) {
             if (isCorrect(answer, userAnswer)) {
                 break;
             }
