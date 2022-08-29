@@ -21,6 +21,16 @@ public class BaseballTest {
         return answer.toString();
     }
 
+    private boolean isStrike(String mockAnswer, String tryAnswer) {
+        for (int i = 0; i < 3; i++) {
+            char answerChar = mockAnswer.charAt(i);
+            char tryChar = tryAnswer.charAt(i);
+            if (answerChar == tryChar)
+                return true;
+        }
+        return false;
+    }
+
     @Test
     void createAnswerResult_should_be_3_letters() throws Exception {
         String answer = createAnswer();
@@ -34,15 +44,6 @@ public class BaseballTest {
         assertTrue(isStrike(mockAnswer, tryAnswer));
     }
 
-    private boolean isStrike(String mockAnswer, String tryAnswer) {
-        for (int i = 0; i < 3; i++) {
-            char answerChar = mockAnswer.charAt(i);
-            char tryChar = tryAnswer.charAt(i);
-            if (answerChar == tryChar)
-                return true;
-        }
-        return false;
-    }
 
 
 }
