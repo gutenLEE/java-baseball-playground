@@ -43,6 +43,10 @@ public class BaseballTest {
         return false;
     }
 
+    private boolean isNothing(String mockAnswer, String tryAnswer) {
+        return !isStrike(mockAnswer, tryAnswer) && !isBall(mockAnswer, tryAnswer);
+    }
+
     @Test
     void createAnswerResult_should_be_3_letters() throws Exception {
         String answer = createAnswer();
@@ -71,6 +75,25 @@ public class BaseballTest {
         tryAnswer = "523";
         assertFalse(isBall(mockAnswer, tryAnswer));
     }
+
+    @Test
+    void returnNothing_test() throws Exception {
+        String mockAnswer = "123";
+        String tryAnswer = "678";
+        assertTrue(isNothing(mockAnswer, tryAnswer));
+
+        // given strike
+        mockAnswer = "123";
+        tryAnswer = "527";
+        assertFalse(isNothing(mockAnswer, tryAnswer));
+
+        // given ball
+        mockAnswer = "123";
+        tryAnswer = "516";
+        assertFalse(isNothing(mockAnswer, tryAnswer));
+    }
+
+
 
 
 
