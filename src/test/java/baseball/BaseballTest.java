@@ -2,9 +2,10 @@ package baseball;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Scanner;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author gutenlee
@@ -45,6 +46,10 @@ public class BaseballTest {
 
     private boolean isNothing(String mockAnswer, String tryAnswer) {
         return !isStrike(mockAnswer, tryAnswer) && !isBall(mockAnswer, tryAnswer);
+    }
+
+    private String createLog(int ballCount, int strikeCount){
+        return String.format("%d볼 %d스트라이크", ballCount, strikeCount);
     }
 
     @Test
@@ -93,9 +98,11 @@ public class BaseballTest {
         assertFalse(isNothing(mockAnswer, tryAnswer));
     }
 
-
-
-
+    @Test
+    void createLog_test() throws Exception {
+        String log = createLog(1, 2);
+        assertEquals("1볼 2스트라이크", log);
+    }
 
 
 }
