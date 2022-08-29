@@ -23,9 +23,9 @@ public class BaseballTest {
         return answer.toString();
     }
 
-    private boolean isStrike(String mockAnswer, String tryAnswer) {
+    private boolean isStrike(String actualAnswer, String tryAnswer) {
         for (int i = 0; i < 3; i++) {
-            char answerChar = mockAnswer.charAt(i);
+            char answerChar = actualAnswer.charAt(i);
             char tryChar = tryAnswer.charAt(i);
             if (answerChar == tryChar)
                 return true;
@@ -33,23 +33,32 @@ public class BaseballTest {
         return false;
     }
 
-    private boolean isBall(String mockAnswer, String tryAnswer) {
+    private boolean isBall(String actualAnswer, String tryAnswer) {
         for (int i = 0; i < 3; i++) {
-            char answerChar = mockAnswer.charAt(i);
+            char answerChar = actualAnswer.charAt(i);
             char tryChar = tryAnswer.charAt(i);
             String aLetter = tryAnswer.substring(i, i + 1);
-            if (answerChar != tryChar && mockAnswer.contains(aLetter))
+            if (answerChar != tryChar && actualAnswer.contains(aLetter))
                 return true;
         }
         return false;
     }
 
-    private boolean isNothing(String mockAnswer, String tryAnswer) {
-        return !isStrike(mockAnswer, tryAnswer) && !isBall(mockAnswer, tryAnswer);
+    private boolean isNothing(String actualAnswer, String tryAnswer) {
+        return !isStrike(actualAnswer, tryAnswer) && !isBall(actualAnswer, tryAnswer);
     }
 
     private String createLog(int ballCount, int strikeCount){
         return String.format("%d볼 %d스트라이크", ballCount, strikeCount);
+    }
+
+    private String createNothingLog() {
+        String log = "낫싱";
+        return log;
+    }
+
+    private boolean isCorrect(String answer, String userAnswer) {
+        return answer.equals(userAnswer);
     }
 
     @Test
@@ -102,6 +111,38 @@ public class BaseballTest {
     void createLog_test() throws Exception {
         String log = createLog(1, 2);
         assertEquals("1볼 2스트라이크", log);
+    }
+
+    @Test
+    void nothingTest() throws Exception {
+        assertTrue(isNothing("123", "456"));
+        assertFalse(isNothing("123", "123"));
+    }
+
+
+
+    @Test
+    void game_test() throws Exception {
+
+        int strikeCount = 0, ballCount = 0;
+        String answer = createAnswer();
+        while(true) {
+            System.out.println("입력하시오 : ");
+            Scanner scanner = new Scanner(System.in);
+            String userAnswer = scanner.nextLine();
+            if (isCorrect(answer, userAnswer)) {
+                break;
+            }
+            if (isStrike(answer, userAnswer))
+                strikeCount++;
+            else if (isBall(answer, userAnswer))
+                ballCount++;
+            else if (isNothing(answer, userAnswer)) {
+                System.out.println(createNothingLog());
+                continue;
+            }
+            System.out.println(createLog(ballCount, strikeCount));
+        }
     }
 
 
