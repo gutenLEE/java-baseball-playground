@@ -15,7 +15,7 @@ public class BaseballTest {
         for (int i = 0; i < 3; i++) {
             double random = Math.random();
             int value = (int) (random * 10);
-            answer.append(Integer.toString(value));
+            answer.append(value);
         }
         return answer.toString();
     }
