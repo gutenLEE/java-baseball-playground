@@ -15,11 +15,15 @@ public class Ball {
     }
 
     public BallStatus play(Ball userBall) {
-        if (this.position != userBall.getPosition() && this.number == userBall.getNumber())
-            return BallStatus.BALL;
-        else if (this.equals(userBall))
+        if (this.equals(userBall))
             return BallStatus.STRIKE;
+        if (this.matchBallNo(userBall.getNumber()))
+            return BallStatus.BALL;
         return BallStatus.NOTHING;
+    }
+
+    private boolean matchBallNo(int userBallNumber) {
+        return this.number == userBallNumber;
     }
 
     @Override
@@ -32,7 +36,7 @@ public class Ball {
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, number);
+        return Objects.hash(this, number);
     }
 
     public int getPosition() {
