@@ -9,10 +9,10 @@ import java.util.List;
  */
 public class Balls {
 
-    List<Ball> balls;
+    List<Ball> answers;
 
     public Balls(List<Integer> answers) {
-        this.balls = mapToBalls(answers);
+        this.answers = mapToBalls(answers);
     }
 
     private List<Ball> mapToBalls(List<Integer> answers) {
@@ -23,8 +23,18 @@ public class Balls {
         return balls;
     }
 
+    public PlayResults plays(List<Integer> userAnswers){
+        Balls userBalls = new Balls(userAnswers);
+        PlayResults playResults = new PlayResults();
+        for (Ball answer : answers) {
+            BallStatus ballStatus = userBalls.plays(answer);
+            playResults.score(ballStatus);
+        }
+        return playResults;
+    }
+
     public BallStatus plays(Ball userBall) {
-        return this.balls.stream()
+        return this.answers.stream()
                 .map(ball -> ball.play(userBall))
                 .filter(BallStatus::isNotNothing)
                 .findFirst()
