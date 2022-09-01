@@ -7,5 +7,9 @@ package baseball;
 public enum BallStatus {
     BALL
     , STRIKE
-    , NOTHING
+    , NOTHING;
+
+    public boolean isNotNothing() {
+        return this != NOTHING;
+    }
 }
