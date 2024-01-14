@@ -10,7 +10,7 @@ public class BallsTest {
     @Test
     public void play_test() {
         Balls computer = new Balls(Arrays.asList(1, 2, 3));
-        PlayResult result = computer.play(Arrays.asList(1, 3, 4));
+        PlayResult result = computer.plays(Arrays.asList(1, 3, 4));
         Assertions.assertThat(result.getStrike()).isEqualTo(1);
         Assertions.assertThat(result.getBall()).isEqualTo(1);
     }

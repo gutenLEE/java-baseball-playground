@@ -20,9 +20,9 @@ public class PlayResult {
     }
 
     public void score(BallStatus ballStatus) {
-        if (BallStatus.STRIKE == ballStatus) {
+        if (ballStatus.isStrike()) {
             strike++;
-        } else if (BallStatus.BALL == ballStatus) {
+        } else if (ballStatus.isBall()) {
             ball++;
         } else {
             nothing++;
